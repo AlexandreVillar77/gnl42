@@ -6,7 +6,7 @@
 /*   By: avillar <alexandre.villar@hotmail.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/22 18:08:48 by avillar          ###   ########.fr       */
+/*   Updated: 2021/01/25 10:20:14 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	get_next_line(int fd, char **line)
 	int				d;
 
 	str = ft_init(str);
-	if (str[i] == '\0')
-		i++;
-	if (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+	if (fd < 0 || (!(buf = malloc(sizeof(char) * BUFFER_SIZE + 1))))
 		return (-1);
 	while ((d = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
@@ -49,6 +47,7 @@ int	get_next_line(int fd, char **line)
 		if (ft_strstr(buf, '\n') == 1)
 			break ;
 	}
+	i++;
 	fill_line(line, str);
 	free(buf);
 	if (d == 0)
