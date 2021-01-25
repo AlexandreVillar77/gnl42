@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <alexandre.villar@hotmail.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 15:12:18 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/25 10:14:47 by avillar          ###   ########.fr       */
+/*   Created: 2021/01/25 16:26:51 by marvin            #+#    #+#             */
+/*   Updated: 2021/01/25 17:18:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "get_next_line.h"
 #include <fcntl.h>
@@ -22,7 +23,7 @@ int	main()
 	int		rtnvalue;
 
 	fd = 1;
-	fd = open("test.txt", O_RDONLY);
+	//fd = open("text.txt", O_RDONLY);
 	rtnvalue = get_next_line(fd, &line);
 	printf("result 1 : %d \n", rtnvalue);
 	printf("result 1 : %s \n", line);
@@ -43,6 +44,10 @@ int	main()
 	printf("result 5 : %d \n", rtnvalue);
 	printf("result 5 : %s \n", line);
 	free(line);
-	close(fd);
+    rtnvalue = get_next_line(fd, &line);
+	printf("result 6 : %d \n", rtnvalue);
+	printf("result 6 : %s \n", line);
+	free(line);
+	//close(fd);
 	return (0);
 }

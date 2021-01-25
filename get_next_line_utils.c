@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avillar <alexandre.villar@hotmail.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/25 14:05:38 by avillar          ###   ########.fr       */
+/*   Updated: 2021/01/25 17:18:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int		fill_line(char **line, char *str)
 	static	int	i;
 
 	x = 0;
-	if (x == 0 && str[i] == '\n' && i != 0)
+	if (x == 0 && str[i] == '\n' && i != 0 && str[i])
 		i++;
 	if (!(*line = malloc(sizeof(char) * ft_strlen_gnl(str + i, 1) + 1)))
 		return (-1);
