@@ -6,7 +6,7 @@
 /*   By: avillar <alexandre.villar@hotmail.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/25 11:59:28 by avillar          ###   ########.fr       */
+/*   Updated: 2021/01/25 14:05:38 by avillar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,24 @@ char	*ft_init(char *str)
 	return (str);
 }
 
-void	fill_line(char **line, char *str)
+int		fill_line(char **line, char *str)
 {
 	int			x;
 	static	int	i;
 
 	x = 0;
-	if (str[i] == '\n')
+	if (x == 0 && str[i] == '\n' && i != 0)
 		i++;
 	if (!(*line = malloc(sizeof(char) * ft_strlen_gnl(str + i, 1) + 1)))
-		return ;
+		return (-1);
 	while (str[i] && str[i] != '\n')
 	{
 		(*line)[x] = str[i];
 		x++;
 		i++;
 	}
+	if (i == 0)
+		i++;
 	(*line)[x] = '\0';
+	return (i);
 }

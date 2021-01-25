@@ -25,6 +25,6 @@ char	*ft_init(char *str);
 char	*ft_remalloc(char *str);
 char	**ft_read(int fd);
 int		get_next_line(int fd, char **line);
-void	fill_line(char **line, char *str);
+int		fill_line(char **line, char *str);
 
 #endif

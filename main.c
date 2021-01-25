@@ -39,6 +39,10 @@ int	main()
 	printf("result 4 : %d \n", rtnvalue);
 	printf("result 4 : %s \n", line);
 	free(line);
+	rtnvalue = get_next_line(fd, &line);
+	printf("result 5 : %d \n", rtnvalue);
+	printf("result 5 : %s \n", line);
+	free(line);
 	close(fd);
 	return (0);
 }
