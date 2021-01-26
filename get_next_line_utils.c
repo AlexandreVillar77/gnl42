@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/25 17:18:27 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/26 15:17:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,9 @@ int		fill_line(char **line, char *str)
 {
 	int			x;
 	static	int	i;
+	static	int	d;
 
 	x = 0;
-	if (x == 0 && str[i] == '\n' && i != 0 && str[i])
-		i++;
 	if (!(*line = malloc(sizeof(char) * ft_strlen_gnl(str + i, 1) + 1)))
 		return (-1);
 	while (str[i] && str[i] != '\n')
@@ -114,8 +113,9 @@ int		fill_line(char **line, char *str)
 		x++;
 		i++;
 	}
-	if (i == 0)
+	d = i;
+	if (str[i] == '\n' && str[i] && i == d)
 		i++;
 	(*line)[x] = '\0';
-	return (i);
+	return (d);
 }
