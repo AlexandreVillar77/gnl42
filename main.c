@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 16:26:51 by marvin            #+#    #+#             */
-/*   Updated: 2021/01/25 17:18:49 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/26 12:26:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,50 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+//	int		rtnvalue = 0;
+
+	if (argc != 2) {
+		return (0);
+	}
+	fd = open(argv[1], O_RDONLY);
+	while (get_next_line(fd, &line) > 0) {
+		printf("%s\n", line);
+		free(line);
+	}
+	free(line);
+	close(fd);
+	return (0);
+}
+/*
+int     main(void) {
+        int             fd = -1;
+        char    *line = NULL;
+        int             ret;
+
+        open file - if an error occurs here, the test will be ignored, that's not your fault !
+        if ((fd = open("text.txt", O_RDONLY)) == -1 || read(fd, NULL, 0) == -1) {
+                return (-1);
+        }
+
+        while ((ret = get_next_line(fd, &line)) > 0) {
+                printf("%s\n", line);
+                free(line);
+                line = NULL;
+        }
+        printf("return value: %d\n", ret);
+        free(line);
+
+        cleaning up 
+        close(fd);
+		printf("%s\n", "success");
+        return (0);
+}
+
 int	main()
 {
 	int		fd;
@@ -23,7 +67,7 @@ int	main()
 	int		rtnvalue;
 
 	fd = 1;
-	//fd = open("text.txt", O_RDONLY);
+	fd = open("text.txt", O_RDONLY);
 	rtnvalue = get_next_line(fd, &line);
 	printf("result 1 : %d \n", rtnvalue);
 	printf("result 1 : %s \n", line);
@@ -48,6 +92,6 @@ int	main()
 	printf("result 6 : %d \n", rtnvalue);
 	printf("result 6 : %s \n", line);
 	free(line);
-	//close(fd);
+	close(fd);
 	return (0);
-}
+}*/
