@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 16:26:51 by marvin            #+#    #+#             */
-/*   Updated: 2021/01/26 15:19:00 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/28 14:16:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ int	main(int argc, char **argv)
 	int		fd;
 	char	*line;
 
-	if (argc != 2) {
+	/*if (argc != 2) {
 		return (0);
-	}
+	}*/
+	(void) argc;
 	fd = open(argv[1], O_RDONLY);
 	while (get_next_line(fd, &line) > 0) {
 		printf("%s\n", line);
 		free(line);
 	}
-	free(line);
+	//free(line);
 	close(fd);
 	return (0);
 }

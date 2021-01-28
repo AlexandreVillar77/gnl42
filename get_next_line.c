@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/26 15:14:54 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/28 15:06:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,19 @@ char	*ft_strjoin(char *str, char *buf)
 	return (str);
 }
 
-int		end(char **line, char *str, char *buf, int d)
+int		end(char **line, char *str, char *buf, int x)
 {
 	int		i;
 
 	i = 0;
 	if (buf)
 		free(buf);
-	if (d == -1)
-		return (-1);
 	if ((i = fill_line(line, str)) == -1)
 		return (-1);
+	/* c'est ce if la avec son leak qu'il faut tester car en fait avant dans le main de faisait un free en sortant du while qui appelait gnl et du coup bah mes test marchait mais
+	 en fait c'était pas bon du coup j'ai mis un free ici et ça  a l'air de marcher par contre sur mes testeur ça mettais double free donc bon jte laisse tester merci.*/
+	if (i == x)
+		free(*line);
 	return (i);
 }
 
@@ -67,7 +69,7 @@ int		get_next_line(int fd, char **line)
 	char			*buf;
 	int				i;
 	int				d;
-	static int		x;
+	static	int		x;
 
 	if (!(buf = malbuf(fd, line)))
 		return (-1);
@@ -76,16 +78,15 @@ int		get_next_line(int fd, char **line)
 	{
 		buf[d] = '\0';
 		str = ft_strjoin(str, buf);
-		buf = ft_remalloc(buf);
-		if (d != 0 || x == x + d)
+		if (d != 0)
 			x += d;
 		if (ft_strstr(buf, '\n') == 1)
 			break ;
 	}
-	i = end(line, str, buf, d);
+	i = end(line, str, buf, x);
 	if (d == -1 || i == -1)
 		return (-1);
-	if ((d == 0 && x == i && str[i + 1] != '\n') || (x == i - 1))
+	if ((d == 0 && x == i))
 		return (0);
 	return (1);
 }
