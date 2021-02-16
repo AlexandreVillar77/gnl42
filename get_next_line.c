@@ -47,7 +47,12 @@ int		end(char **line, char *str, char *buf, int x)
 	/* c'est ce if la avec son leak qu'il faut tester car en fait avant dans le main de faisait un free en sortant du while qui appelait gnl et du coup bah mes test marchait mais
 	 en fait c'était pas bon du coup j'ai mis un free ici et ça  a l'air de marcher par contre sur mes testeur ça mettais double free donc bon jte laisse tester merci.*/
 	if (i == x)
+	{
+		if (!(*line))
+			if (!(*line = malloc(sizeof(char) * 1)))
+				return (-1);
 		free(*line);
+	}
 	return (i);
 }
 
