@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 int		ft_strlen_gnl(char *str, int mod);
 void	ft_addtostr(char *str, char *buf);

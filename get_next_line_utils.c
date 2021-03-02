@@ -83,7 +83,6 @@ char	*ft_remalloc(char *str)
 		i++;
 	}
 	str[i] = '\0';
-	printf("adresse de tmp = %p\n", tmp);
 	free(tmp);
 	return (str);
 }

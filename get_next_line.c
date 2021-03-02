@@ -35,35 +35,18 @@ char	*ft_strjoin(char *str, char *buf)
 	return (str);
 }
 
-int		end(char **line, char *str, char *buf, int x)
+int		end(char **line, char *str, char *buf, int d)
 {
 	int		i;
 
 	i = 0;
 	if (buf)
 		free(buf);
+	if (d < 0)
+		return (-1);
 	if ((i = fill_line(line, str)) == -1)
 		return (-1);
-	/* c'est ce if la avec son leak qu'il faut tester car en fait avant dans le main de faisait un free en sortant du while qui appelait gnl et du coup bah mes test marchait mais
-	 en fait c'était pas bon du coup j'ai mis un free ici et ça  a l'air de marcher par contre sur mes testeur ça mettais double free donc bon jte laisse tester merci.*/
-	if (i == x)
-	{
-		if (*line)
-			free(*line);
-	}
 	return (i);
-}
-
-void	ft_putstr(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
 }
 
 char	*malbuf(int fd, char **line)
@@ -99,12 +82,7 @@ int		get_next_line(int fd, char **line)
 		if (ft_strstr(buf, '\n') == 1)
 			break ;
 	}
-	//ft_putstr(&str);
-	printf("adresse de str = %p\n", str);
-	printf("adresse de buf = %p\n", buf);
-	printf("adresse de line = %p\n", *line);
-	i = end(line, str, buf, x);
-	if (d == -1 || i == -1)
+	if ((i = end(line, str, buf, d)) == -1 || d == -1)
 		return (-1);
 	if ((d == 0 && x == i))
 		return (0);
