@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/28 14:26:11 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/26 15:17:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*ft_remalloc(char *str)
 		i++;
 	}
 	str[i] = '\0';
+	printf("adresse de tmp = %p\n", tmp);
 	free(tmp);
 	return (str);
 }

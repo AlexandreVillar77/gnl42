@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/28 15:06:40 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/26 15:29:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,22 @@ int		end(char **line, char *str, char *buf, int x)
 	 en fait c'était pas bon du coup j'ai mis un free ici et ça  a l'air de marcher par contre sur mes testeur ça mettais double free donc bon jte laisse tester merci.*/
 	if (i == x)
 	{
-		if (!(*line))
-			if (!(*line = malloc(sizeof(char) * 1)))
-				return (-1);
-		free(*line);
+		if (*line)
+			free(*line);
 	}
 	return (i);
+}
+
+void	ft_putstr(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 }
 
 char	*malbuf(int fd, char **line)
@@ -83,11 +93,16 @@ int		get_next_line(int fd, char **line)
 	{
 		buf[d] = '\0';
 		str = ft_strjoin(str, buf);
-		if (d != 0)
+		buf = ft_remalloc(buf);
+		if (d != 0 || x == x + d)
 			x += d;
 		if (ft_strstr(buf, '\n') == 1)
 			break ;
 	}
+	//ft_putstr(&str);
+	printf("adresse de str = %p\n", str);
+	printf("adresse de buf = %p\n", buf);
+	printf("adresse de line = %p\n", *line);
 	i = end(line, str, buf, x);
 	if (d == -1 || i == -1)
 		return (-1);

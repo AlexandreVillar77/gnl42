@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 11:49:53 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/28 14:26:14 by marvin           ###   ########.fr       */
+/*   Updated: 2021/01/27 18:44:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h>
 
 int		ft_strlen_gnl(char *str, int mod);
 void	ft_addtostr(char *str, char *buf);
