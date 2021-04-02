@@ -5,117 +5,106 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/21 11:52:21 by avillar           #+#    #+#             */
-/*   Updated: 2021/01/26 15:17:41 by marvin           ###   ########.fr       */
+/*   Created: 2021/03/29 11:55:36 by marvin            #+#    #+#             */
+/*   Updated: 2021/04/02 13:00:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_strlen_gnl(char *str, int mod)
+int		ft_strlen(char *str)
 {
-	int	i;
-	int	l;
+	int		i;
 
-	l = 0;
 	i = 0;
-	if (mod == 1)
-	{
-		while (str[i] != '\n' && str[i])
-			i++;
-	}
-	else if (mod == 2)
-	{
-		while (str[i])
-			i++;
-	}
-	else if (mod == 3)
-	{
-		while (str[i++])
-			if (str[i] == '\n')
-				l++;
-		return (l);
-	}
+	while (str[i] != '\0')
+		i++;
 	return (i);
 }
 
-void	ft_addtostr(char *str, char *buf)
+char	*ft_strcpy(char *src)
 {
-	int i;
-	int x;
+	int		i;
+	char	*dst;
+
+	i = 0;
+	if (!(dst = malloc(sizeof(char) * ft_strlen(src) + 1)))
+		return (0);
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strcat(char *src, char *tmp)
+{
+	int		i;
+	int		x;
+	char	*dst;
 
 	i = 0;
 	x = 0;
-	while (str[i])
+	if (!(dst = malloc(sizeof(char) * ft_strlen(tmp) + ft_strlen(src) + 1)))
+		return (0);
+	while (tmp[i])
 	{
+		dst[i] = tmp[i];
 		i++;
 	}
-	while (buf[x])
+	while (src[x])
 	{
-		str[i] = buf[x];
+		dst[i] = src[x];
 		x++;
 		i++;
 	}
-	str[i] = '\0';
+	dst[i] = '\0';
+	return (dst);
 }
 
-char	*ft_remalloc(char *str)
+char	*checkbuf(char *buf, char *keep)
 {
 	int		i;
+	int		x;
 	char	*tmp;
 
 	i = 0;
-	if (!(tmp = malloc(sizeof(char) * ft_strlen_gnl(str, 2) + 1)))
-		return (0);
-	while (str[i])
-	{
-		tmp[i] = str[i];
-		i++;
-	}
-	tmp[i] = '\0';
-	free(str);
-	if (!(str = malloc(sizeof(char) * i + BUFFER_SIZE + 1)))
-		return (0);
-	i = 0;
-	while (tmp[i])
-	{
-		str[i] = tmp[i];
-		i++;
-	}
-	str[i] = '\0';
-	free(tmp);
-	return (str);
-}
-
-char	*ft_init(char *str)
-{
-	if (!str)
-	{
-		if (!(str = malloc(sizeof(char) * BUFFER_SIZE + 1)))
-			return (0);
-		str[0] = '\0';
-	}
-	return (str);
-}
-
-int		fill_line(char **line, char *str)
-{
-	int			x;
-	static	int	i;
-	static	int	d;
-
 	x = 0;
-	if (!(*line = malloc(sizeof(char) * ft_strlen_gnl(str + i, 1) + 1)))
-		return (-1);
-	while (str[i] && str[i] != '\n')
+	if (!keep)
 	{
-		(*line)[x] = str[i];
-		x++;
+		if (!(keep = malloc(BUFFER_SIZE)))
+			return (0);
+		keep[0] = '\0';
+	}
+	while (buf[i] != '\0')
+		i++;
+	if (buf[i] == '\0')
+	{
+		while (keep[x])
+			x++;
+		tmp = ft_strcpy(keep);
+		free(keep);
+		keep = ft_strcat(buf, tmp);
+		free(tmp);
+	}
+	return (keep);
+}
+
+char	*putline(char *keep)
+{
+	int		i;
+	char	*dst;
+
+	i = 0;
+	if (!(dst = malloc(sizeof(char) * ft_linelen(keep) + 1)))
+		return (0);
+	while (keep[i] != '\n' && keep[i] != '\0')
+	{
+		dst[i] = keep[i];
 		i++;
 	}
-	d = i;
-	if (str[i] == '\n' && str[i] && i == d)
-		i++;
-	(*line)[x] = '\0';
-	return (d);
+	dst[i] = '\0';
+	return (dst);
 }
