@@ -18,6 +18,11 @@ char	*cleankeep(char *keep, int len)
 	char	*tmp;
 
 	i = 0;
+	if (ft_strlen(keep) == len)
+	{
+		free(keep);
+		return (NULL);
+	}
 	if (keep[len] == '\n')
 		len++;
 	if (!(tmp = malloc(sizeof(char) * ((ft_strlen(keep) - len) + 1))))
@@ -79,9 +84,9 @@ int		get_next_line(int fd, char **line)
 		keep = checkbuf(buf, keep);
 	}
 	free(buf);
-	if (x == 0)
-		return (0);
 	*line = putline(keep);
 	keep = cleankeep(keep, ft_strlen(*line));
+	if (x == 0)
+		return (0);
 	return (1);
 }
