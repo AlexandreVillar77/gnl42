@@ -28,7 +28,7 @@ char	*ft_strcpy(char *src)
 	char	*dst;
 
 	i = 0;
-	if (!(dst = malloc(sizeof(char) * ft_strlen(src) + 1)))
+	if (!(dst = malloc(sizeof(char) * (ft_strlen(src) + 1))))
 		return (0);
 	while (src[i])
 	{
@@ -47,7 +47,7 @@ char	*ft_strcat(char *src, char *tmp)
 
 	i = 0;
 	x = 0;
-	if (!(dst = malloc(sizeof(char) * ft_strlen(tmp) + ft_strlen(src) + 1)))
+	if (!(dst = malloc(sizeof(char) * (ft_strlen(tmp) + ft_strlen(src) + 1))))
 		return (0);
 	while (tmp[i])
 	{
@@ -67,28 +67,20 @@ char	*ft_strcat(char *src, char *tmp)
 char	*checkbuf(char *buf, char *keep)
 {
 	int		i;
-	int		x;
 	char	*tmp;
 
 	i = 0;
-	x = 0;
+
 	if (!keep)
 	{
-		if (!(keep = malloc(BUFFER_SIZE)))
+		if (!(keep = malloc(sizeof(char) * 1)))
 			return (0);
 		keep[0] = '\0';
 	}
-	while (buf[i] != '\0')
-		i++;
-	if (buf[i] == '\0')
-	{
-		while (keep[x])
-			x++;
-		tmp = ft_strcpy(keep);
-		free(keep);
-		keep = ft_strcat(buf, tmp);
-		free(tmp);
-	}
+	tmp = ft_strcpy(keep);
+	free(keep);
+	keep = ft_strcat(buf, tmp);
+	free(tmp);
 	return (keep);
 }
 
