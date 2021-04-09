@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 16:26:51 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/02 12:47:16 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/09 15:25:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ int	main(int argc, char **argv)
 		return (0);
 	}*/
 	(void) argc;
-	(void) argv;
 	d = 0;
-	fd = open("many_biglines.txt", O_RDONLY);
+	if (argc >= 2)
+		fd = open(argv[1], O_RDONLY);
+	else
+		fd = 0;
 	while ((d = get_next_line(fd, &line)) > 0) {
 		printf("%s\n", line);
 		free(line);

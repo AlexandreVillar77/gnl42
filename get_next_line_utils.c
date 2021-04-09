@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 11:55:36 by marvin            #+#    #+#             */
-/*   Updated: 2021/04/02 13:00:04 by marvin           ###   ########.fr       */
+/*   Updated: 2021/04/06 16:36:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ char	*ft_strcat(char *src, char *tmp)
 
 char	*checkbuf(char *buf, char *keep)
 {
-	int		i;
 	char	*tmp;
-
-	i = 0;
 
 	if (!keep)
 	{
